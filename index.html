@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank By Piyal Shah</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="login-area" class="login-zone">
+            <h1 class="text-center">Welcome To Pioneer Bank</h1>
+            <div class="submit-area">
+                <h4>Log In</h4>
+                <br>
+                <input class="form-control" type="text" placeholder="Username">
+                <br>
+                <input class="form-control" type="password" placeholder="Password">
+                <br>
+                <input id="login" class="btn btn-outline-secondary login-btn" type="submit" value="Login">
+            </div>
+        </div>
+    </div>
+
+    <div id="transaction-area" class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit">
+                    <h5>Deposit</h5>
+                    <h2>$<span id="currentDeposit">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw">
+                    <h5>Withdraw</h5>
+                    <h2>$<span id="withdrawAmount">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balace">
+                    <h5>Balace</h5>
+                    <h2>$<span id="currentBalance">1200</span></h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row add-amount">
+            <div class="col-md-6">
+                <div class="submit-btn">
+                    <h4>Deposit</h4>
+                    <br>
+                    <input id="depositAmount" type="number" class="form-control" placeholder="$ ammount you want to deposit">
+                    <br>
+                    <input id="addDeposit" class="btn btn-outline-secondary login-btn" type="submit" value="Deposit">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-btn">
+                    <h4>Withdraw</h4>
+                    <br>
+                    <input id="withdrawAmountInput" type="number" class="form-control" placeholder="$ ammount you want to withdraw">
+                    <br>
+                    <input id="withdrawAmountBtn" class="btn btn-outline-secondary login-btn" type="submit" value="Withdraw">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container text-center">
+        <div class="copyright">
+            <p>&copy; 2020 pioneer bank | all rights reversed by piyal shah</p>
+        </div>
+    </footer>
+
+
+    <script>
+
+        //login area event handler
+        const loginBtn = document.getElementById("login");
+        loginBtn.addEventListener("click", function(){
+            const loginArea = document.getElementById("login-area");
+            loginArea.style.display = "none";
+            const transactionArea = document.getElementById("transaction-area");
+            transactionArea.style.display = "block";
+        });
+
+        //deposit event handler
+        const catchDepositBtn = document.getElementById("addDeposit");
+            catchDepositBtn.addEventListener("click", function(){
+                const catchDepositAmount = document.getElementById("depositAmount").value;
+                const depositAmountNumber = parseFloat(catchDepositAmount);
+
+                // const catchCurrentDeposit = document.getElementById("currentDeposit").innerText;
+                // const conCurDepToNum = parseFloat(catchCurrentDeposit);
+                // const totalDeposit = conCurDepToNum + convertStrToNum;
+                // document.getElementById("currentDeposit").innerText = totalDeposit;
+
+                updateSpanText("currentDeposit", depositAmountNumber);
+                updateSpanText("currentBalance", depositAmountNumber);
+
+                document.getElementById("depositAmount").value = "";
+            });
+
+            //Withdraw amount event handler
+            const catchWithdrawAmountBtn = document.getElementById("withdrawAmountBtn");
+            catchWithdrawAmountBtn.addEventListener("click", function(){
+                const catchWithdrawInput = document.getElementById("withdrawAmountInput").value;
+                const withdrawInputNumber = parseFloat(catchWithdrawInput);
+
+                const catchWithdrawAmount =  document.getElementById("withdrawAmount").innerText;
+                const withdrawNumber = parseFloat(catchWithdrawAmount);
+
+                const currentBalance = document.getElementById("currentBalance").innerText;
+                const currentBalanceNumber = parseFloat(currentBalance);
+
+                const totalWithdraw = withdrawNumber + withdrawInputNumber;
+                const totalCurrentBalance = currentBalanceNumber - totalWithdraw;
+
+
+                document.getElementById("withdrawAmount").innerText = totalWithdraw;
+                document.getElementById("currentBalance").innerText = totalCurrentBalance;
+
+                document.getElementById("withdrawAmountInput").value = "";
+            });
+
+            function updateSpanText(id, depositAmountNumber){
+
+                const currentAmount = document.getElementById(id).innerText;
+                const currentAmountNumber = parseFloat(currentAmount);
+                const totalAmount = currentAmountNumber + depositAmountNumber;
+                document.getElementById(id).innerText = totalAmount;
+            }
+    </script>
+
+</body>
+</html>
